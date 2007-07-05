@@ -2,7 +2,7 @@
 Summary:	LaTeX TrueType fonts for LyX
 Name:		fonts-ttf-latex
 Version:	0.1
-Release:	%mkrel 4
+Release:	%mkrel 5
 
 # see README: these fonts were converted from the LaTeX .pfb forms,
 #             and are under the respective licenses of the sources.
@@ -16,8 +16,6 @@ Source0:	http://movementarian.org/latex-xft-fonts-%version.tar.gz
 BuildArch:	noarch
 BuildRoot:	%_tmppath/%name-%version-%release-root
 Provides:	latex-xft-fonts
-Requires(post):	chkfontpath
-Requires(postun):chkfontpath
 Requires(post):	fontconfig
 Requires(postun):fontconfig
 
@@ -42,16 +40,16 @@ cd %buildroot/%_datadir/fonts/TTF/latex/
 cp fonts.scale fonts.dir
 )
 
+mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
+ln -s ../../..%_datadir/fonts/TTF/latex \
+    %{buildroot}%_sysconfdir/X11/fontpath.d/ttf-latex:pri=50
+
 %post
-[ -x %_sbindir/chkfontpath ] && %_sbindir/chkfontpath -q -a %_datadir/fonts/TTF/latex
-touch %{_datadir}/fonts/TTF
 [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache 
 
 %postun
 # 0 means a real uninstall
 if [ "$1" = "0" ]; then
-   [ -x %_sbindir/chkfontpath ] && \
-   %_sbindir/chkfontpath -q -r %_datadir/fonts/TTF/latex
    [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache 
 fi
 
@@ -61,13 +59,10 @@ rm -fr %buildroot
 %files
 %defattr(0644,root,root,0755)
 %doc README
-#
-%dir %_datadir/fonts/TTF/
 %dir %_datadir/fonts/TTF/latex/
 %_datadir/fonts/TTF/latex/*.ttf
-#
 %config(noreplace) %_datadir/fonts/TTF/latex/fonts.dir
 %config(noreplace) %_datadir/fonts/TTF/latex/fonts.scale
-
+%_sysconfdir/X11/fontpath.d/ttf-latex:pri=50
 
 
