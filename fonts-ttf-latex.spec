@@ -2,7 +2,7 @@
 Summary:	LaTeX TrueType fonts for LyX
 Name:		fonts-ttf-latex
 Version:	0.1
-Release:	%mkrel 6
+Release:	%mkrel 7
 
 # see README: these fonts were converted from the LaTeX .pfb forms,
 #             and are under the respective licenses of the sources.
