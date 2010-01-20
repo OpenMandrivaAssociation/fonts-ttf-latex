@@ -2,7 +2,7 @@
 Summary:	LaTeX TrueType fonts for LyX
 Name:		fonts-ttf-latex
 Version:	0.1
-Release:	%mkrel 7
+Release:	%mkrel 8
 
 # see README: these fonts were converted from the LaTeX .pfb forms,
 #             and are under the respective licenses of the sources.
@@ -16,8 +16,6 @@ Source0:	http://movementarian.org/latex-xft-fonts-%version.tar.gz
 BuildArch:	noarch
 BuildRoot:	%_tmppath/%name-%version-%release-root
 Provides:	latex-xft-fonts
-Requires(post):	fontconfig
-Requires(postun):fontconfig
 
 %description
 This Package provides LaTeX TrueType fonts so that LyX can display LaTex
@@ -43,15 +41,6 @@ cp fonts.scale fonts.dir
 mkdir -p %{buildroot}%_sysconfdir/X11/fontpath.d/
 ln -s ../../..%_datadir/fonts/TTF/latex \
     %{buildroot}%_sysconfdir/X11/fontpath.d/ttf-latex:pri=50
-
-%post
-[ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache 
-
-%postun
-# 0 means a real uninstall
-if [ "$1" = "0" ]; then
-   [ -x %{_bindir}/fc-cache ] && %{_bindir}/fc-cache 
-fi
 
 %clean
 rm -fr %buildroot
