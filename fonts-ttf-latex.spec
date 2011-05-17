@@ -14,6 +14,7 @@ Group:		System/Fonts/True type
 Source0:	http://movementarian.org/latex-xft-fonts-%version.tar.gz
 
 BuildArch:	noarch
+BuildRequires: fontconfig
 BuildRoot:	%_tmppath/%name-%version-%release-root
 Provides:	latex-xft-fonts
 
