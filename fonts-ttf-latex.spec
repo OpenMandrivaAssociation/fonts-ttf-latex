@@ -6,7 +6,7 @@ Release:	24
 #             and are under the respective licenses of the sources.
 License:	Distributable
 Group:		System/Fonts/True type
-Url:		http://wiki.lyx.org/pmwiki.php/FAQ/Qt
+Url:		https://wiki.lyx.org/pmwiki.php/FAQ/Qt
 Source0:	http://movementarian.org/latex-xft-fonts-%{version}.tar.gz
 BuildArch:	noarch
 BuildRequires:	fontconfig
